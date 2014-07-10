@@ -28,9 +28,12 @@ describe Robot do
 		end
 	end
 
-	describe '#PLACE' do
-		it 'Place robot to specified position' do
-			
+	describe '#place' do
+		it 'put robot to specified position' do
+			@robot.place(1, 1, :north)
+			expect(@robot.x).to eq(1)
+			expect(@robot.y).to eq(1)
+			expect(@robot.f).to eq(:north)
 		end
 	end
 end
