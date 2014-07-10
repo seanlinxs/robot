@@ -39,9 +39,9 @@ class Robot
 
 	def place(x, y, f)
 		unless will_fall?(x, y)
-			@x = x
-			@y = y
-			@f = f
+			@x = x.to_i
+			@y = y.to_i
+			@f = f.downcase.to_sym
 			@placed = true
 		end
 	end
@@ -85,9 +85,29 @@ class Robot
 		end
 	end
 
+	def follow_directives(directives)
+		expected_output = nil
+		actual_output   = nil
+		directives.each do |directive|
+			directive = directive.strip
+			if directive =~ /Output:\s*(.*)/
+				expected_output = $1
+			else
+				command, args = directive.split(/\s/)
+				command = command.downcase.to_sym
+				args = args.split(/,/) if args
+				actual_output = self.send(command, *args) if self.respond_to?(command)
+			end
+		end
+
+		[expected_output, actual_output]
+	end
+
     private
 	
 	def will_fall?(x, y)
+		x = x.to_i
+		y = y.to_i
 		x < 0 || x > 4 || y < 0 || y > 4
 	end
 end

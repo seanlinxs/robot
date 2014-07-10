@@ -26,6 +26,10 @@ describe Robot do
 		it 'report current position' do
 			expect(@robot).to respond_to(:report).with(0).arguments
 		end
+
+		it 'can understand and follow directives in sequence' do
+			expect(@robot).to respond_to(:follow_directives).with(1).arguments
+		end
 	end
 
 	describe '#place' do
@@ -199,6 +203,19 @@ describe Robot do
 			expect(@robot.report).to eq('0,0,SOUTH')
 			@robot.place(0, 0, :east)
 			expect(@robot.report).to eq('0,0,EAST')
+		end
+	end
+
+	describe '#follow_directives' do
+		it 'can follow directives' do
+			directives_dir = File.expand_path('../directives/', __FILE__)
+			Dir.foreach(directives_dir) do |directives_file|
+				if (directives_file =~ /\.txt$/)
+					directives = File.readlines(File.join(directives_dir, directives_file))
+					expected_output, actual_output = @robot.follow_directives(directives)
+					expect(expected_output).to eq(actual_output)
+				end
+			end
 		end
 	end
 end
