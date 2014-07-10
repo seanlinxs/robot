@@ -73,6 +73,13 @@ describe Robot do
 	end
 
 	describe '#move' do
+		it 'cannot move if not on the table' do
+			@robot.move
+			expect(@robot.x).to eq(0)
+			expect(@robot.y).to eq(0)
+			expect(@robot.f).to eq(:north)
+		end
+
 		it 'move robot one unit step' do
 			@robot.place(0, 0, :north)
 			@robot.move

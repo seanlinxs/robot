@@ -6,6 +6,7 @@ class Robot
 		@x = x
 		@y = y
 		@f = f
+		@placed = false
 	end
 
 	def x
@@ -32,20 +33,27 @@ class Robot
 		@f = f
 	end
 
+	def placed?
+		@placed
+	end
+
 	def place(x, y, f)
 		unless will_fall?(x, y)
 			@x = x
 			@y = y
 			@f = f
+			@placed = true
 		end
 	end
 
 	def move
-		case f
-		when :north then self.y += 1 unless will_fall?(x, y + 1)
-		when :south then self.y -= 1 unless will_fall?(x, y - 1)
-		when :east  then self.x += 1 unless will_fall?(x + 1, y)
-		when :west  then self.x -= 1 unless will_fall?(x - 1, y)
+		if placed?
+			case f
+			when :north then self.y += 1 unless will_fall?(x, y + 1)
+			when :south then self.y -= 1 unless will_fall?(x, y - 1)
+			when :east  then self.x += 1 unless will_fall?(x + 1, y)
+			when :west  then self.x -= 1 unless will_fall?(x - 1, y)
+			end
 		end
 	end
 
