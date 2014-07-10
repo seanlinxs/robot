@@ -1,0 +1,7 @@
+How to run tests
+rspec robot_spec.rb
+
+How to run app
+ruby robot_play directives/directives_001.txt
+
+Change directives file to run different directives
