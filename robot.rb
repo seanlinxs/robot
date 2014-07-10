@@ -82,6 +82,8 @@ class Robot
 	def report
 		if placed?
 			"#{x},#{y},#{f.to_s.upcase}"
+		else
+			""
 		end
 	end
 

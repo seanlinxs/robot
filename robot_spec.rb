@@ -191,7 +191,7 @@ describe Robot do
 
 	describe '#report' do
 		it 'cannot report if not on the table' do
-			expect(@robot.report).to be_nil
+			expect(@robot.report).to eq("")
 		end
 
 		it 'can report' do
@@ -211,6 +211,7 @@ describe Robot do
 			directives_dir = File.expand_path('../directives/', __FILE__)
 			Dir.foreach(directives_dir) do |directives_file|
 				if (directives_file =~ /\.txt$/)
+					@robot = Robot.new
 					directives = File.readlines(File.join(directives_dir, directives_file))
 					expected_output, actual_output = @robot.follow_directives(directives)
 					expect(expected_output).to eq(actual_output)
