@@ -41,6 +41,12 @@ class Robot
 	end
 
 	def move
+		case f
+		when :north then self.y += 1 unless will_fall?(x, y + 1)
+		when :south then self.y -= 1 unless will_fall?(x, y - 1)
+		when :east  then self.x += 1 unless will_fall?(x + 1, y)
+		when :west  then self.x -= 1 unless will_fall?(x - 1, y)
+		end
 	end
 
 	def left

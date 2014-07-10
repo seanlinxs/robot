@@ -30,21 +30,93 @@ describe Robot do
 
 	describe '#place' do
 		it 'put robot to specified position' do
-			@robot.place(1, 1, :north)
-			expect(@robot.x).to eq(1)
-			expect(@robot.y).to eq(1)
+			@robot.place(0, 0, :north)
+			expect(@robot.x).to eq(0)
+			expect(@robot.y).to eq(0)
+			expect(@robot.f).to eq(:north)
+			@robot.place(0, 4, :north)
+			expect(@robot.x).to eq(0)
+			expect(@robot.y).to eq(4)
+			expect(@robot.f).to eq(:north)
+			@robot.place(4, 0, :north)
+			expect(@robot.x).to eq(4)
+			expect(@robot.y).to eq(0)
+			expect(@robot.f).to eq(:north)
+			@robot.place(4, 4, :north)
+			expect(@robot.x).to eq(4)
+			expect(@robot.y).to eq(4)
+			expect(@robot.f).to eq(:north)
+			@robot.place(2, 3, :north)
+			expect(@robot.x).to eq(2)
+			expect(@robot.y).to eq(3)
 			expect(@robot.f).to eq(:north)
 		end
 
-		it 'can not put robot out of the table' do
-			@robot.place(-1, 1, :north)
+		it 'cannot put robot out of the table' do
+			@robot.place(-1, 0, :north)
 			expect(@robot.x).to eq(0)
 			expect(@robot.y).to eq(0)
 			expect(@robot.f).to eq(:north)
-			@robot.place(1, -1, :north)
+			@robot.place(0, -1, :north)
+			expect(@robot.x).to eq(0)
+			expect(@robot.y).to eq(0)
+			expect(@robot.f).to eq(:north)			
+			@robot.place(5, 0, :north)
 			expect(@robot.x).to eq(0)
 			expect(@robot.y).to eq(0)
 			expect(@robot.f).to eq(:north)
+			@robot.place(0, 5, :north)
+			expect(@robot.x).to eq(0)
+			expect(@robot.y).to eq(0)
+			expect(@robot.f).to eq(:north)
+		end
+	end
+
+	describe '#move' do
+		it 'move robot one unit step' do
+			@robot.place(0, 0, :north)
+			@robot.move
+			expect(@robot.x).to eq(0)
+			expect(@robot.y).to eq(1)
+			expect(@robot.f).to eq(:north)
+			@robot.f = :south
+			@robot.move
+			expect(@robot.x).to eq(0)
+			expect(@robot.y).to eq(0)
+			expect(@robot.f).to eq(:south)
+			@robot.f = :east
+			@robot.move
+			expect(@robot.x).to eq(1)
+			expect(@robot.y).to eq(0)
+			expect(@robot.f).to eq(:east)
+			@robot.f = :west
+			@robot.move
+			expect(@robot.x).to eq(0)
+			expect(@robot.y).to eq(0)
+			expect(@robot.f).to eq(:west)
+		end
+
+		it 'cannot move robot out of table' do
+			@robot.place(0, 0, :south)
+			@robot.move
+			expect(@robot.x).to eq(0)
+			expect(@robot.y).to eq(0)
+			expect(@robot.f).to eq(:south)
+			@robot.place(0, 4, :north)
+			@robot.move
+			expect(@robot.x).to eq(0)
+			expect(@robot.y).to eq(4)
+			expect(@robot.f).to eq(:north)
+			@robot.place(0, 0, :west)
+			@robot.move
+			expect(@robot.x).to eq(0)
+			expect(@robot.y).to eq(0)
+			expect(@robot.f).to eq(:west)
+			@robot.place(4, 0, :east)
+			@robot.move
+			expect(@robot.x).to eq(4)
+			expect(@robot.y).to eq(0)
+			expect(@robot.f).to eq(:east)
 		end
 	end
 end
