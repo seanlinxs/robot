@@ -164,7 +164,7 @@ describe Robot do
 			expect(@robot.f).to eq(:north)
 		end
 
-		it 'can turn left' do
+		it 'can turn right' do
 			@robot.place(0, 0, :north)
 			@robot.right
 			expect(@robot.x).to eq(0)
@@ -182,6 +182,23 @@ describe Robot do
 			expect(@robot.x).to eq(0)
 			expect(@robot.y).to eq(0)
 			expect(@robot.f).to eq(:north)
+		end
+	end
+
+	describe '#report' do
+		it 'cannot report if not on the table' do
+			expect(@robot.report).to be_nil
+		end
+
+		it 'can report' do
+			@robot.place(0, 0, :north)
+			expect(@robot.report).to eq('0,0,NORTH')
+			@robot.place(0, 0, :west)
+			expect(@robot.report).to eq('0,0,WEST')
+			@robot.place(0, 0, :south)
+			expect(@robot.report).to eq('0,0,SOUTH')
+			@robot.place(0, 0, :east)
+			expect(@robot.report).to eq('0,0,EAST')
 		end
 	end
 end

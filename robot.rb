@@ -80,6 +80,9 @@ class Robot
 	end
 
 	def report
+		if placed?
+			"#{x},#{y},#{f.to_s.upcase}"
+		end
 	end
 
     private
