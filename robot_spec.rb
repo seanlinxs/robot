@@ -35,5 +35,16 @@ describe Robot do
 			expect(@robot.y).to eq(1)
 			expect(@robot.f).to eq(:north)
 		end
+
+		it 'can not put robot out of the table' do
+			@robot.place(-1, 1, :north)
+			expect(@robot.x).to eq(0)
+			expect(@robot.y).to eq(0)
+			expect(@robot.f).to eq(:north)
+			@robot.place(1, -1, :north)
+			expect(@robot.x).to eq(0)
+			expect(@robot.y).to eq(0)
+			expect(@robot.f).to eq(:north)
+		end
 	end
 end

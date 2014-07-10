@@ -33,6 +33,11 @@ class Robot
 	end
 
 	def place(x, y, f)
+		unless will_fall?(x, y)
+			@x = x
+			@y = y
+			@f = f
+		end
 	end
 
 	def move
@@ -45,5 +50,11 @@ class Robot
 	end
 
 	def report
+	end
+
+    private
+	
+	def will_fall?(x, y)
+		x < 0 || x > 4 || y < 0 || y > 4
 	end
 end
