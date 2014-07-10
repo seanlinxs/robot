@@ -126,4 +126,62 @@ describe Robot do
 			expect(@robot.f).to eq(:east)
 		end
 	end
+
+	describe '#left' do
+		it 'cannot turn left if not on the table' do
+			@robot.left
+			expect(@robot.x).to eq(0)
+			expect(@robot.y).to eq(0)
+			expect(@robot.f).to eq(:north)
+		end
+
+		it 'can turn left' do
+			@robot.place(0, 0, :north)
+			@robot.left
+			expect(@robot.x).to eq(0)
+			expect(@robot.y).to eq(0)
+			expect(@robot.f).to eq(:west)
+			@robot.left
+			expect(@robot.x).to eq(0)
+			expect(@robot.y).to eq(0)
+			expect(@robot.f).to eq(:south)
+			@robot.left
+			expect(@robot.x).to eq(0)
+			expect(@robot.y).to eq(0)
+			expect(@robot.f).to eq(:east)
+			@robot.left
+			expect(@robot.x).to eq(0)
+			expect(@robot.y).to eq(0)
+			expect(@robot.f).to eq(:north)
+		end
+	end
+
+	describe '#right' do
+		it 'cannot turn right if not on the table' do
+			@robot.right
+			expect(@robot.x).to eq(0)
+			expect(@robot.y).to eq(0)
+			expect(@robot.f).to eq(:north)
+		end
+
+		it 'can turn left' do
+			@robot.place(0, 0, :north)
+			@robot.right
+			expect(@robot.x).to eq(0)
+			expect(@robot.y).to eq(0)
+			expect(@robot.f).to eq(:east)
+			@robot.right
+			expect(@robot.x).to eq(0)
+			expect(@robot.y).to eq(0)
+			expect(@robot.f).to eq(:south)
+			@robot.right
+			expect(@robot.x).to eq(0)
+			expect(@robot.y).to eq(0)
+			expect(@robot.f).to eq(:west)
+			@robot.right
+			expect(@robot.x).to eq(0)
+			expect(@robot.y).to eq(0)
+			expect(@robot.f).to eq(:north)
+		end
+	end
 end

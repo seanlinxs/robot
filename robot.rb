@@ -58,9 +58,25 @@ class Robot
 	end
 
 	def left
+		if placed?
+			case f
+			when :north then self.f = :west	
+			when :west  then self.f = :south	
+			when :south then self.f = :east	
+			when :east  then self.f = :north	
+			end
+		end
 	end
 
 	def right
+		if placed?
+			case f
+			when :north then self.f = :east	
+			when :east  then self.f = :south	
+			when :south then self.f = :west	
+			when :west  then self.f = :north	
+			end
+		end
 	end
 
 	def report
